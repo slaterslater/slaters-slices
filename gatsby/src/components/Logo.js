@@ -40,17 +40,16 @@ const LogoStyles = styled.div`
   .slices {
     font-size: 3.2em;
     letter-spacing: 0.2em;
-    transform: translateY(-1.8em);
+    transform: translateY(-0.15em);
   }
-  .slaters {
+  .slicks {
     transform: scale(1.4);
-    margin-top: 1.2em;
     display: block;
     text-shadow: 0.18em 0.18em 0 rgba(0, 0, 0, 0.05);
     perspective: 100px;
   }
   .letter {
-    font-size: 5em;
+    font-size: 3.5em;
     color: var(--red);
     --scale: 1;
     --rotate: -10deg;
@@ -68,42 +67,38 @@ const LogoStyles = styled.div`
     }
     &.l {
       --rotate: 2deg;
-      --scale: 1.2;
-      --translateX: 0.03em;
-      --translateY: 0.05em;
+      --scale: 1.4;
+      --translateX: 0.05em;
+      --translateY: -0.05em;
     }
     &.a {
-      --scale: 0.8;
+      --scale: 0.9;
       --translateY: -0.1em;
-      --translateX: -0.15em;
+      --translateX: 0.1em;
     }
     &.t {
-      --rotate: 8deg;
-      --scale: 1;
-      --translateX: -0.25em;
-      --translateY: 0.05em;
+      --rotate: 3deg;
+      --scale: 1.2;
+      --translateX: -0.01em;
+      --translateY: -0.08em;
     }
     &.e {
-      --rotate: -1deg;
+      --rotate: -10deg;
       --scale: 0.8;
-      --translateY: 0.3em;
-      --translateX: -0.5em;
+      --translateX: 0.03em;
     }
     &.r {
-      --rotate: -3deg;
-      --scale: 0.8;
-      --translateY: 0.3em;
-      --translateX: -0.65em;
+      --rotate: -12deg;
+      --scale: 1.2;
+      --translateX: 0.06em;
     }
     &.apos {
-      --translateX: 1.2em;
-      --translateY: -0.7em;
+      --translateX: 0.1em;
     }
     &.s {
       --rotate: 12deg;
-      --scale: 1.1;
-      --translateY: -1em;
-      --translateX: 0.75em;
+      --scale: 0.9;
+      --translateY: -0.14em;
     }
   }
 `;
@@ -112,9 +107,9 @@ export default function Logo() {
   return (
     <LogoStyles className="logo">
       <div className="inner">
-        <span className="est">EST 1994</span>
+        <span className="est">EST 1997</span>
         <h1>
-          <span className="slaters">
+          <span className="slicks">
             <span className="letter S">S</span>
             <span className="letter l">l</span>
             <span className="letter a">a</span>

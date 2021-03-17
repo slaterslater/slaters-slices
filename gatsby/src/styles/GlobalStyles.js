@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-size: 2rem;
+    min-width:320px;
   }
 
   fieldset {
