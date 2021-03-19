@@ -40,7 +40,7 @@ const LogoStyles = styled.div`
   .slices {
     font-size: 3.2em;
     letter-spacing: 0.2em;
-    transform: translateY(-0.15em);
+    transform: translateY(-0.5em);
   }
   .slicks {
     transform: scale(1.4);
