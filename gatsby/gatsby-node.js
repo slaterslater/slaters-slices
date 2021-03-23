@@ -1,9 +1,7 @@
 import path from 'path';
 
 async function turnPizzasIntoPages({ graphql, actions }) {
-  // 1. get template for this page
   const pizzaTemplate = path.resolve('./src/templates/Pizza.js');
-  // 2. query all pizzas
   const { data } = await graphql(`
     query {
       pizzas: allSanityPizza {
@@ -25,13 +23,36 @@ async function turnPizzasIntoPages({ graphql, actions }) {
       },
     });
   });
-  // 3. loop over each pizza and create a page
+}
+
+async function turnToppingsIntoPages({ graphql, actions }) {
+  const toppingTemplate = path.resolve(
+    '/Users/slaterslater/courses/slickslices/gatsby/src/pages/pizzas.js'
+  );
+  const { data } = await graphql(`
+    query {
+      toppings: allSanityTopping {
+        nodes {
+          name
+        }
+      }
+    }
+  `);
+  data.toppings.nodes.forEach((topping) => {
+    actions.createPage({
+      path: `/topping/${topping.name}`,
+      component: toppingTemplate,
+      context: {
+        topping: topping.name,
+        toppingRegex: `/${topping.name}/i`,
+      },
+    });
+  });
 }
 
 export async function createPages(params) {
-  // create pages dynamically
-  // 1. pizzas
-  await turnPizzasIntoPages(params);
-  // 2. toppings
-  // 3. slicemasters
+  await Promise.all([
+    turnPizzasIntoPages(params),
+    turnToppingsIntoPages(params),
+  ]);
 }

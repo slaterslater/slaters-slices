@@ -10,9 +10,6 @@ const PizzaGrid = styled.div`
 `;
 
 export default function SinglePizzaPage({ data: { pizza } }) {
-  // const { pizza } = data;
-  // console.log(data);
-  // return <div>...</div>;
   return (
     <PizzaGrid>
       <Img fluid={pizza.image.asset.fluid} alt={pizza.name} />
