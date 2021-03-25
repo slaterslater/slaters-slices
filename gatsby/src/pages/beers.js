@@ -30,10 +30,10 @@ const SingleBeerSyles = styled.div`
 
 function beersWithImages(beers) {
   return beers.filter((beer) => {
-    const img = new Image();
     const isDefaultImage = beer.image.endsWith('8979036078110.png');
+    const img = new Image();
     img.src = beer.image;
-    return !isDefaultImage && img.height !== 0;
+    return !isDefaultImage && img.naturalHeight !== 0;
   });
 }
 
@@ -42,7 +42,7 @@ export default function BeerPage({ data }) {
   return (
     <>
       <h2 className="center">{`We have ${beers.length} beers on tap!`}</h2>
-      <p className="center">(Only IPAs because I like those best...)</p>
+      <p className="center">(Only IPAs because they're the best...)</p>
       <BeerGridStyles>
         {beers.map((beer) => {
           const rating = Math.round(beer.rating.average);

@@ -6,9 +6,9 @@ import Pagination from '../components/Pagination';
 
 const SlicemasterGrid = styled.div`
   display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  /* grid-template-columns: fit-content(50%) fit-content(50%); */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 4rem;
+  grid-auto-rows: auto auto;
 `;
 
 const SlicemasterStyles = styled.div`
@@ -19,7 +19,7 @@ const SlicemasterStyles = styled.div`
     height: 400px;
   }
   h2 {
-    transform: rotate(-2deg);
+    transform: rotate(-3deg);
     text-align: center;
     font-size: 4rem;
     margin-bottom: -2rem;
