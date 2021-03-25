@@ -77,6 +77,35 @@ async function fetchBeersAndTurnIntoNodes({
   });
 }
 
+async function turnSlicemastersIntoPages({ graphql, actions }) {
+  const { data } = await graphql(`
+    query {
+      slicemasters: allSanityPerson {
+        nodes {
+          id
+          name
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+  const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
+  const pageCount = Math.ceil(data.slicemasters.nodes.length / pageSize);
+  for (let i = 0; i < pageCount; i += 1) {
+    actions.createPage({
+      path: `/slicemasters/${i + 1}`,
+      component: path.resolve('./src/pages/slicemasters.js'),
+      context: {
+        skip: i * pageSize,
+        currentPage: i + 1,
+        limit: pageSize,
+      },
+    });
+  }
+}
+
 export async function sourceNodes(params) {
   await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
 }
@@ -85,5 +114,6 @@ export async function createPages(params) {
   await Promise.all([
     turnPizzasIntoPages(params),
     turnToppingsIntoPages(params),
+    turnSlicemastersIntoPages(params),
   ]);
 }

@@ -8,6 +8,10 @@ const BeerGridStyles = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 `;
 
+// align h3 to top of grid
+// price and rating to the bottom
+// justify the img
+
 const SingleBeerSyles = styled.div`
   border: 1px solid var(--grey);
   padding: 2rem;
@@ -27,8 +31,9 @@ const SingleBeerSyles = styled.div`
 function beersWithImages(beers) {
   return beers.filter((beer) => {
     const img = new Image();
+    const isDefaultImage = beer.image.endsWith('8979036078110.png');
     img.src = beer.image;
-    return img.height !== 0;
+    return !isDefaultImage && img.height !== 0;
   });
 }
 
@@ -36,8 +41,8 @@ export default function BeerPage({ data }) {
   const beers = beersWithImages(data.beers.nodes);
   return (
     <>
-      <h2 className="center">{`There are ${beers.length} beers!`}</h2>
-      <p className="center">(We only have IPAs...)</p>
+      <h2 className="center">{`We have ${beers.length} beers on tap!`}</h2>
+      <p className="center">(Only IPAs because I like those best...)</p>
       <BeerGridStyles>
         {beers.map((beer) => {
           const rating = Math.round(beer.rating.average);
