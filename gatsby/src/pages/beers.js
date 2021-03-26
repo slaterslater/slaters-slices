@@ -28,28 +28,28 @@ const SingleBeerSyles = styled.div`
   }
 `;
 
-function beersWithImages(beers) {
-  return beers.filter((beer) => {
-    const isDefaultImage = beer.image.endsWith('8979036078110.png');
-    const img = new Image();
-    img.src = beer.image;
-    return !isDefaultImage && img.naturalHeight !== 0;
-  });
-}
-
 export default function BeerPage({ data }) {
-  const beers = beersWithImages(data.beers.nodes);
+  const beers = data.beers.nodes;
+  const [missingImages, setMissingImages] = React.useState([]);
+  const filteredBeer = React.useMemo(
+    () => beers.filter((beer) => !missingImages.includes(beer.id)),
+    [beers, missingImages]
+  );
   return (
     <>
-      <h2 className="center">{`We have ${beers.length} beers on tap!`}</h2>
+      <h2 className="center">{`We have ${filteredBeer.length} beers on tap!`}</h2>
       <p className="center">(Only IPAs because they're the best...)</p>
       <BeerGridStyles>
-        {beers.map((beer) => {
+        {filteredBeer.map((beer) => {
           const rating = Math.round(beer.rating.average);
           return (
             <SingleBeerSyles key={beer.id}>
               <h3>{beer.name}</h3>
-              <img src={beer.image} alt={beer.name} />
+              <img
+                src={beer.image}
+                alt={beer.name}
+                onError={() => setMissingImages((prev) => [...prev, beer.id])}
+              />
               <p>Price: {beer.price}</p>
               <p title={`${rating} out of 5 stars`}>
                 {`⭐`.repeat(rating)}
@@ -69,7 +69,11 @@ export default function BeerPage({ data }) {
 export const query = graphql`
   query {
     beers: allBeer(
-      filter: { rating: { average: { gt: 2.9 } }, name: { regex: "/ipa/i" } }
+      filter: {
+        rating: { average: { gt: 2.9 } }
+        name: { regex: "/ipa/i" }
+        image: { regex: "/.*(?<!8979036078110.png)$/" }
+      }
     ) {
       nodes {
         id
