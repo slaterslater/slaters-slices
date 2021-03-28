@@ -39,9 +39,6 @@ const SlicemasterStyles = styled.div`
 `;
 
 export default function SlicemastersPage({ data, pageContext }) {
-  // console.table(data.slicemasters.nodes);
-  console.clear();
-  console.log(pageContext.limit);
   const slicemasters = data.slicemasters.nodes;
   return (
     <>
@@ -76,16 +73,16 @@ export const query = graphql`
       nodes {
         id
         name
+        description
+        slug {
+          current
+        }
         image {
           asset {
             fluid(maxWidth: 250) {
               ...GatsbySanityImageFluid
             }
           }
-        }
-        description
-        slug {
-          current
         }
       }
     }

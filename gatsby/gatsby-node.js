@@ -82,7 +82,6 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
     query {
       slicemasters: allSanityPerson {
         nodes {
-          id
           name
           slug {
             current
@@ -104,6 +103,15 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
       },
     });
   }
+  data.slicemasters.nodes.forEach((slicemaster) => {
+    actions.createPage({
+      path: `slicemaster/${slicemaster.slug.current}`,
+      component: path.resolve('./src/templates/Slicemaster.js'),
+      context: {
+        slug: slicemaster.slug.current,
+      },
+    });
+  });
 }
 
 export async function sourceNodes(params) {
