@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from './src/components/Layout';
+import { OrderProvider } from './src/components/OrderContext';
 
 export function wrapPageElement({ element, props }) {
   return <Layout>{element}</Layout>;
@@ -7,3 +8,7 @@ export function wrapPageElement({ element, props }) {
 
 // should the Layout component have a prop spread {...props}
 // return <Layout {...props}>{element}</Layout>
+
+export function wrapRootElement({ element }) {
+  return <OrderProvider>{element}</OrderProvider>;
+}
