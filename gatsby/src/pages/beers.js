@@ -1,6 +1,7 @@
 import { graphql } from 'gatsby';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
+import SEO from '../components/SEO';
 
 const BeerGridStyles = styled.div`
   display: grid;
@@ -30,15 +31,16 @@ const SingleBeerSyles = styled.div`
 
 export default function BeerPage({ data }) {
   const beers = data.beers.nodes;
-  const [missingImages, setMissingImages] = React.useState([]);
-  const filteredBeer = React.useMemo(
+  const [missingImages, setMissingImages] = useState([]);
+  const filteredBeer = useMemo(
     () => beers.filter((beer) => !missingImages.includes(beer.id)),
     [beers, missingImages]
   );
   return (
     <>
+      <SEO title="Beers" />
       <h2 className="center">{`We have ${filteredBeer.length} beers on tap!`}</h2>
-      <p className="center">(Only IPAs because they're the best...)</p>
+      <p className="center">(Hopefully you like IPAs...)</p>
       <BeerGridStyles>
         {filteredBeer.map((beer) => {
           const rating = Math.round(beer.rating.average);
