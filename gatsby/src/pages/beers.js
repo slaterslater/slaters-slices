@@ -9,23 +9,24 @@ const BeerGridStyles = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 `;
 
-// align h3 to top of grid
-// price and rating to the bottom
-// justify the img
-
 const SingleBeerSyles = styled.div`
   border: 1px solid var(--grey);
   padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
   img {
     width: 100%;
     height: 200px;
     object-fit: contain;
     display: block;
-    display: grid;
-    align-items: center;
     font-size: 10px;
     color: black;
+  }
+  p {
+    margin-bottom: 0;
   }
 `;
 
@@ -52,14 +53,16 @@ export default function BeerPage({ data }) {
                 alt={beer.name}
                 onError={() => setMissingImages((prev) => [...prev, beer.id])}
               />
-              <p>Price: {beer.price}</p>
-              <p title={`${rating} out of 5 stars`}>
-                {`⭐`.repeat(rating)}
-                <span style={{ filter: `grayscale(100%)` }}>
-                  {`⭐`.repeat(5 - rating)}
-                </span>
-                <span>{beer.rating.review}</span>
-              </p>
+              <section>
+                <p>Price: {beer.price}</p>
+                <p title={`${rating} out of 5 stars`}>
+                  {`⭐`.repeat(rating)}
+                  <span style={{ filter: `grayscale(100%)` }}>
+                    {`⭐`.repeat(5 - rating)}
+                  </span>
+                  <span>{beer.rating.review}</span>
+                </p>
+              </section>
             </SingleBeerSyles>
           );
         })}
