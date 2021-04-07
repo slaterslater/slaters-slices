@@ -37,7 +37,7 @@ export default function OrderPage({ data }) {
     <>
       <SEO title="Place your order" />
       <OrderStyles onSubmit={submitOrder}>
-        <fieldset>
+        <fieldset disabled={loading}>
           <legend>Your Info</legend>
           <label htmlFor="name">Name</label>
           <input
@@ -76,7 +76,7 @@ export default function OrderPage({ data }) {
             </MenuItemStyles>
           ))}
         </fieldset>
-        <fieldset className="order">
+        <fieldset className="order" disabled={loading}>
           <legend>Order Summary</legend>
           <PizzaOrder
             order={order}
@@ -84,13 +84,13 @@ export default function OrderPage({ data }) {
             pizzas={pizzas}
           />
         </fieldset>
-        <fieldset>
+        <fieldset disabled={loading}>
           <h3>
             Your total is {formatMoney(calculateOrderTotal(order, pizzas))}
           </h3>
           <div>{error ? <p>Error: {error} </p> : ''}</div>
           <button type="submit" disabled={loading}>
-            {loading ? 'placing order' : 'Order Ahead'}
+            {loading ? 'Placing Order...' : 'Order Ahead'}
           </button>
         </fieldset>
       </OrderStyles>

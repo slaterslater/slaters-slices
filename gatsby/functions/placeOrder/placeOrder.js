@@ -42,23 +42,19 @@ const transporter = nodemailer.createTransport({
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
   console.log(body);
-  // validate data
   const requiredFields = ['email', 'name', 'order'];
 
   for (const field of requiredFields) {
     console.log(`checking if the ${field} is good`);
-    if (!body[field]) {
+    if (!body[field].length) {
       return {
         statusCode: 400,
         body: JSON.stringify({
-          message: `Please take a look at the ${field} field?`,
+          message: `Looks like you forgot to add your ${field}...`,
         }),
       };
     }
   }
-  // send the email
-
-  // send success or error
 
   const info = await transporter.sendMail({
     from: "Slater's Slices <slater@example.com>",
@@ -66,7 +62,6 @@ exports.handler = async (event, context) => {
     subject: 'Your Pizza Order',
     html: generateOrderEmail(body),
   });
-  // console.log(info);
   return {
     statusCode: 200,
     body: JSON.stringify(info),
