@@ -42,8 +42,16 @@ const transporter = nodemailer.createTransport({
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
   console.log(body);
+  // check if honey pot is filled
+  if (body.barf) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: 'Looks like you barfed...',
+      }),
+    };
+  }
   const requiredFields = ['email', 'name', 'order'];
-
   for (const field of requiredFields) {
     console.log(`checking if the ${field} is good`);
     if (!body[field].length) {

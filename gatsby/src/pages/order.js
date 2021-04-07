@@ -17,6 +17,7 @@ export default function OrderPage({ data }) {
   const { values, updateValue } = useForm({
     name: '',
     email: '',
+    barf: '',
   });
   const {
     order,
@@ -51,6 +52,12 @@ export default function OrderPage({ data }) {
             type="text"
             name="email"
             value={values.email}
+            onChange={updateValue}
+          />
+          <input
+            type="text"
+            name="barf"
+            value={values.barf}
             onChange={updateValue}
           />
         </fieldset>
