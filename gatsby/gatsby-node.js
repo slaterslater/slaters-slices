@@ -27,9 +27,7 @@ async function turnPizzasIntoPages({ graphql, actions }) {
 }
 
 async function turnToppingsIntoPages({ graphql, actions }) {
-  const toppingTemplate = path.resolve(
-    '/Users/slaterslater/courses/slickslices/gatsby/src/pages/pizzas.js'
-  );
+  const toppingTemplate = path.resolve('./src/pages/pizzas.js');
   const { data } = await graphql(`
     query {
       toppings: allSanityTopping {

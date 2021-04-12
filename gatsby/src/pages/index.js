@@ -36,14 +36,12 @@ function HotSlices({ hotslices }) {
 
 export default function HomePage() {
   const { hotSlices, slicemasters } = useLatestData();
-  console.clear();
-  console.log({ hotSlices }, { slicemasters });
   return (
     <>
       <SEO title="Homepage" />
       <div className="center">
-        <h1>Pizza Site</h1>
-        <p>info about this</p>
+        <h1>The Best Pizza In The City You Live In</h1>
+        <blockquote>Definitely not a site about fake pizza!</blockquote>
         <HomePageGrid>
           <CurrentlySlicing slicemasters={slicemasters} />
           <HotSlices hotslices={hotSlices} />
