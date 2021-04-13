@@ -5,8 +5,8 @@ import { ItemsGrid, ItemStyles } from '../styles/Grids';
 export default function LoadingGrid({ count }) {
   return (
     <ItemsGrid>
-      {Array.from(Array(count)).map(() => (
-        <ItemStyles>
+      {Array.from(Array(count)).map((_, i) => (
+        <ItemStyles key={`item-grid-${i}`}>
           <p className="mark">Loading...</p>
           <img
             src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAECAQAAADsOj3LAAAADklEQVR42mNkgANGQkwAAJoABWH6GPAAAAAASUVORK5CYII="
